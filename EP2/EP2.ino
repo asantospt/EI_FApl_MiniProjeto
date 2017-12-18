@@ -1,9 +1,9 @@
 /** 
  * @file EP2.ino
- * @brief SMART HOME: EP1
- * @date - 2017-12-
+ * @brief SMART HOME: EP2
+ * @date - 2017-12-18
  * @authors Afonso (2130653) & Natanael (2110634)
- * @state INC - Falta testar e acender e apagar led.
+ * @state INC - Falta esclarecer detecçâo Ocorrência
  */
 
 /** 
@@ -11,24 +11,28 @@
  * 5V -> USB
  * GND -> breadboard 
  * A0 -> sensor QRE1113
+ * 13 -> R1 (220 Ohm) + LED
  * 
  * @Sensor de reflexão/proximidade 'QRE1113'
- * 1 -> 5V + R1 (130 kOhm)
+ * 1 -> 5V + R1 (130 Ohm)
  * 2 -> GND
  * 3 -> V_out + R2 (10 kOhm) 
  * 4 -> GND
+ *
+* @led
+ * + -> 5V + R1 (220 Ohm)
+ * - -> GND
  */
 
 
 // Constantes usadas no programa 
 const int PIN_QRE = A0;
-int CONTAGEM = 0;
+const int LED_PIN =  13; 
+int CONTAGEM = 2;
 
 //Controle de tempos
 //T1: Tempo entre identificação de reflexão - Milisegundos
 const int DELTA_T1 = 2000;
-unsigned long tRef1 = 0;
-unsigned long tRef2 = 0;
 
 bool LED = 0;
 
@@ -51,6 +55,7 @@ Tolerancia = 50 + -
 
 void setup() {
   Serial.begin (9600);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
@@ -58,32 +63,34 @@ void loop() {
   float instanteAtual = millis();
 
   //Accionar o led por 2 segundos inicialmente
-  if ((instanteAtual - tRef1) >= DELTA_T1 ){
+  if ((instanteAtual) <= DELTA_T1 ){
     //por o LED a HIGH
-
+    digitalWrite(LED_PIN, HIGH);
     
   }else if (LED == 0) {
     //por o led a low
+    digitalWrite(LED_PIN, LOW);
+     Serial.println("LED IS LOW");
     LED = 1;
   }
 
-  // Ler reflexão a cada 2 segundos para estabilizar a contagem
-  if ( (instanteAtual - tRef2) >= DELTA_T1 ){
+  //Iniciar detecção animal domestico
+  if ((instanteAtual) >= DELTA_T1 ){
     int sensorValue = analogRead(PIN_QRE);
+    Serial.println(sensorValue);
     Serial.println(CONTAGEM);
-    
-    if(sensorValue > 700 && sensorValue < 800 ){
+
+    if(sensorValue > 850 && sensorValue < 900 ){
       CONTAGEM = CONTAGEM + 1;
     }
-  }
-
-  if ( (CONTAGEM % 2) == 0) {
-    //Por o led a High
-
-  }else{
-    //Por o led a low
-
-  }
+      if ( (CONTAGEM & 1) == 0) {
+        //Por o led a High
+        digitalWrite(LED_PIN, LOW);    
+        }else{
+          //Por o led a low
+          digitalWrite(LED_PIN, HIGH);
+        }
+      }
 
   delay(100);
 }
