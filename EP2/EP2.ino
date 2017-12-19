@@ -31,7 +31,7 @@ const int LED_PIN =  13;
 int CONTAGEM = 2;
 
 //Controle de tempos
-//T1: Tempo entre identificação de reflexão - Milisegundos
+//T1: Tempo para primeira identificação de reflexão - Milisegundos
 const int DELTA_T1 = 2000;
 
 bool LED = 0;
@@ -70,7 +70,6 @@ void loop() {
   }else if (LED == 0) {
     //por o led a low
     digitalWrite(LED_PIN, LOW);
-     Serial.println("LED IS LOW");
     LED = 1;
   }
 
