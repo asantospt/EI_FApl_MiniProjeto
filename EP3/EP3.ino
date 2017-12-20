@@ -51,7 +51,7 @@ const float KELVIN = 273.15;
 //T1: Tempo para primeiro registo de temperatura - Milisegundos
 const int DELTA_T1 = 2000;
 
-bool LED = 0;
+bool led = 0;
 
 // Valores pré-definidos no enunciado
 /**
@@ -91,12 +91,12 @@ void loop() {
     digitalWrite(LED_PIN_AMARELO, HIGH);
     digitalWrite(LED_PIN_VERDE, HIGH);
     
-  }else if (LED == 0) {
+  }else if (led == 0) {
     //por o led a low
     digitalWrite(LED_PIN_VERMELHO, LOW);
     digitalWrite(LED_PIN_AMARELO, LOW);
     digitalWrite(LED_PIN_VERDE, LOW);
-    LED = 1;
+    led = 1;
   }
 
   // Leitura do Vout do NTC (V_NTC)

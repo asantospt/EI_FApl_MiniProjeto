@@ -56,10 +56,10 @@ const int DELTA_T2 = 10000;
 unsigned long tRef2= 0;
 
 //Alarme accionado
-bool ALARM = 0;
+bool alarm = 0;
 
 //PRINT INTRUSÃO
-bool INTRUSAO = 0;
+bool intrusao = 0;
 
 //Codigo Alarme
 int SECRET = 1234;
@@ -99,14 +99,14 @@ void loop() {
     duration = pulseIn(PIN_ECHO, HIGH);
     float distance = ((float)duration / VEL_ULTRASSONS_AR);  
       
-      if (ALARM == 0 && distance < 61){
+      if (alarm == 0 && distance < 61){
         Serial.print(distance); 
         Serial.println(" cm");
         Serial.println("Insira código de Segurança");
         tRef1 = instanteAtual;
         tRef2 = instanteAtual;
-        ALARM = 1;
-        INTRUSAO = 0;  
+        alarm = 1;
+        intrusao = 0;  
 
       }
   }
@@ -114,15 +114,15 @@ void loop() {
   int secret;
   secret = Serial.parseInt();
 
-  if (ALARM == 1 && SECRET == secret ){
+  if (alarm == 1 && SECRET == secret ){
     tone(PIN_BUZZER, 880, 1);
-    ALARM = 0;
+    alarm = 0;
   }
 
-  if (ALARM == 1 && (instanteAtual - tRef2) >= DELTA_T2 ){
-    if(INTRUSAO == 0){
+  if (alarm == 1 && (instanteAtual - tRef2) >= DELTA_T2 ){
+    if(intrusao == 0){
       Serial.println("INTRUSÃO!");
-      INTRUSAO = 1;
+      intrusao = 1;
     }
     tone(PIN_BUZZER, 880 , 0); 
   }

@@ -28,13 +28,16 @@
 // Constantes usadas no programa 
 const int PIN_QRE = A0;
 const int LED_PIN =  13; 
-int CONTAGEM = 2;
+
 
 //Controle de tempos
 //T1: Tempo para primeira identificação de reflexão - Milisegundos
 const int DELTA_T1 = 2000;
 
-bool LED = 0;
+bool led = 0;
+int contagem = 2;
+//Variavel para implementar funcionalidade de apenas uma ocorrencia por reflexão
+bool toggle = 0;
 
 // Valores pré-definidos no enunciado
 /**
@@ -67,22 +70,28 @@ void loop() {
     //por o LED a HIGH
     digitalWrite(LED_PIN, HIGH);
     
-  }else if (LED == 0) {
+  }else if (led == 0) {
     //por o led a low
     digitalWrite(LED_PIN, LOW);
-    LED = 1;
+    led = 1;
   }
 
   //Iniciar detecção animal domestico
   if ((instanteAtual) >= DELTA_T1 ){
     int sensorValue = analogRead(PIN_QRE);
     Serial.println(sensorValue);
-    Serial.println(CONTAGEM);
+    Serial.println(contagem);
 
-    if(sensorValue > 850 && sensorValue < 900 ){
-      CONTAGEM = CONTAGEM + 1;
+    if(sensorValue > 850 && sensorValue < 900){
+      if(toogle==0){
+        contagem = contagem + 1;
+        toogle = 1;
+      }
+    }else{
+      toogle = 0;
     }
-      if ( (CONTAGEM & 1) == 0) {
+
+      if ( (contagem & 1) == 0) {
         //Por o led a High
         digitalWrite(LED_PIN, LOW);    
         }else{
