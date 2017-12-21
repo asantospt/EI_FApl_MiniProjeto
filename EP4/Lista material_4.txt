@@ -1,0 +1,8 @@
+
+Arduino 'Mega 2560'
+Fonte de alimentação externa
+Jumper wires (fios)
+
+LDR
+LED verde
+Resistência ? Ohm
