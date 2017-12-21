@@ -30,6 +30,8 @@ const float VALOR_MAX_LDR = 2.00;     // valor min. lido (tapado) = 2.00
 
 // Valores pré-definidos no enunciado
 const int TEMPO_MADRUGADA = 10000;        // (em milissegundos, 10 segundos) Simulação da 04:00 da madrugada
+
+
 const int TOT_PERC_BRILHO = 255;          // Brilho máximo = 255
 const int METADE_PERC_BRILHO = 128;       // Metade do brilho máximo = 127.5
 
@@ -48,8 +50,17 @@ void setup() {
 }
 
 void loop() {
+  unsigned long instanteAtual = 0;
   int sensorValueLDR = 0;
   float voltageLDR = 0.0;
+
+  instanteAtual = millis();
+  if ((instanteAtual - tRef) >= deltaT1) {
+      //ação
+      tRef1 = instanteAtual;
+  }
+
+
   
   // read the input on analog pin X:
   sensorValueLDR = analogRead(PIN_LDR);
