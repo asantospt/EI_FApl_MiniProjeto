@@ -10,17 +10,17 @@
  * LIGAÇÕES: @Arduino 'Mega 2560'
  * 5V -> USB
  * GND -> breadboard 
- * A0 -> sensor QRE1113
+ * A0 -> sensor QRE1113, pin3
  * 13 -> R1 (220 Ohm) + LED
  * 
  * @Sensor de reflexão/proximidade 'QRE1113'
- * 1 -> 5V + R1 (130 Ohm)
+ * 1 -> R1 (130 Ohm) + 5V
  * 2 -> GND
- * 3 -> V_out + R2 (10 kOhm) 
+ * 3 -> V_out (A0) + R2 (10 kOhm) 
  * 4 -> GND
  *
 * @led
- * + -> 5V + R1 (220 Ohm)
+ * + -> R3 (220 Ohm) + Arduino, pin 13
  * - -> GND
  */
 
@@ -34,10 +34,10 @@ const int LED_PIN =  13;
 //T1: Tempo para primeira identificação de reflexão - Milisegundos
 const int DELTA_T1 = 2000;
 
-bool led = 0;
-int contagem = 2;
+//bool led = 0;
+int contagem = 0;
 //Variavel para implementar funcionalidade de apenas uma ocorrencia por reflexão
-bool toggle = 0;
+bool toogle = 0;
 
 // Valores pré-definidos no enunciado
 /**
@@ -59,10 +59,15 @@ Tolerancia = 50 + -
 void setup() {
   Serial.begin (9600);
   pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH);
+  delay(2000);
+  digitalWrite(LED_PIN, LOW);
+
+
 }
 
 void loop() {
-  //Contar milisegundos desde o arranque do sistema
+  /*Contar milisegundos desde o arranque do sistema
   float instanteAtual = millis();
 
   //Accionar o led por 2 segundos inicialmente
@@ -75,14 +80,14 @@ void loop() {
     digitalWrite(LED_PIN, LOW);
     led = 1;
   }
-
+  */
   //Iniciar detecção animal domestico
-  if ((instanteAtual) >= DELTA_T1 ){
+  //if ((instanteAtual) >= DELTA_T1 ){
     int sensorValue = analogRead(PIN_QRE);
     Serial.println(sensorValue);
     Serial.println(contagem);
 
-    if(sensorValue > 850 && sensorValue < 900){
+    if(sensorValue > 400 && sensorValue < 850){
       if(toogle==0){
         contagem = contagem + 1;
         toogle = 1;
@@ -90,7 +95,6 @@ void loop() {
     }else{
       toogle = 0;
     }
-
       if ( (contagem & 1) == 0) {
         //Por o led a High
         digitalWrite(LED_PIN, LOW);    
@@ -98,7 +102,7 @@ void loop() {
           //Por o led a low
           digitalWrite(LED_PIN, HIGH);
         }
-      }
+      //}
 
   delay(100);
 }
