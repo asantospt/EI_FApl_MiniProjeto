@@ -1,0 +1,17 @@
+
+Arduino 'Mega 2560'
+Fonte de alimentação externa
+Jumper wires (fios)
+
+NTC
+AmpOp 8032
+LED verde
+LED vemelho
+LED Amarelo
+3 Resistência 220 Ohm
+
+Portas Arduino Usadas:
+A1 -> AmpOp
+10 -> Led Vermelho
+11 -> Led Amarelo
+12 -> Led Verde

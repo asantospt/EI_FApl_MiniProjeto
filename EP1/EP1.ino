@@ -112,6 +112,7 @@ void loop() {
   }
 
   int secret;
+  //receber texto enviado pela consola da porta serie
   secret = Serial.parseInt();
 
   if (alarm == 1 && SECRET == secret ){

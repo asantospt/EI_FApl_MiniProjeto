@@ -1,0 +1,14 @@
+
+Arduino 'Mega 2560'
+Fonte de alimentação externa
+Jumper wires (fios)
+
+Sensor ultrasons HC-SR04
+Buzzer
+Resistência 10000 Ohm
+
+
+Portas Arduino Usadas
+3 -> Sensor ultrassons, Trig
+4 -> Sensor ultrassons, Echo
+8 -> Buzzer

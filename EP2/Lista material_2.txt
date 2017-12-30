@@ -1,0 +1,14 @@
+
+Arduino 'Mega 2560'
+Fonte de alimentação externa
+Jumper wires (fios)
+
+QRE1113
+LED vemelho
+Resistência 220 Ohm
+Resistência 10000 Ohm
+Resistência 130 Ohm
+
+Portas Arduino Usadas
+A0 -> sensor QRE1113, pin3
+13 -> R1 (220 Ohm) + LED
