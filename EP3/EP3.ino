@@ -66,6 +66,9 @@ const float KELVIN = 273.15;
 const int TREF1 = 15;
 const int TREF2 = 28;
 const int TREF3 = 30;
+const float TMPOSC = 0.5;
+//para validar se faz print de temperatura no ecrã
+float tNTCp = 0.0;
 
 // Declaração de funções
 
@@ -99,7 +102,14 @@ void loop() {
   //calcular temp cº
   float tNTC = 1.0 / ((1.0 / T0) + ((1.0 / BETA) * log(rNTC / R0))) - KELVIN; 
   //para debug
-  Serial.println(tNTC); 
+  Serial.println(tNTC);
+
+  //Fazer print da temperatura se alteraç\ao de 0,5 graus
+  if(tNTC > (tNTCp + TMPOSC) || tNTC < (tNTCp - TMPOSC) ){
+    tNTCp = tNTC;
+    Serial.print("Temperatura Cº: ");
+    Serial.println(tNTCp);
+  } 
 
     // LED - Verde
   if (tNTC <= TREF1) {
