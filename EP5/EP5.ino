@@ -32,6 +32,9 @@ const int T_LIMIAR_2 = 30;        // Temperatura considerado como 'Calor'
 const float T_LIMIAR_LUZ = 80.0;        // Valor para incidência de luz solar
             // TODO: medir valores
 
+const int DELTA_T1 = 10000;
+unsigned long tRef = 0;
+
 int pos = 0;    // variable to store the servo position
 
 // Valores pré-definidos no enunciado
@@ -44,17 +47,42 @@ void setup() {
   
   myservo.attach(PIN_SERVO);  // attaches the servo on pin 9 to the servo object
 
-  myservo.write(50); 
-  Serial.println("Teste servo - na posição 50º");   // debug
+  myservo.write(MIN_ANG_SERVO); 
   delay(15);  
+  myservo.write(20); 
+  delay(15);
   myservo.write(MIN_ANG_SERVO); 
   Serial.println("Teste servo - na posição 10º");   // debug
   delay(15);  
 }
 
 void loop() {
+  unsigned long instanteAtual;
   int temp_ep3 = 0;
   float luminosidade_ep4 = 0.0;
+
+  // TODO: verificar alterações a cada 10 segs.
+  instanteAtual = millis();
+  if ((instanteAtual - tRef) >= DELTA_T1) {   
+      //ação a executar a cd 10 segs
+      tRef = instanteAtual;
+  }
+
+  // ######################## testar - sweep
+  for (pos = MIN_ANG_SERVO; pos <= MAX_ANG_SERVO; pos += 1) { // goes from 0 degrees to 170 degrees
+    // in steps of 1 degree
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    Serial.println(pos); 
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = MAX_ANG_SERVO; pos >= MIN_ANG_SERVO; pos -= 1) { // goes from 170 degrees to 0 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    Serial.println(pos); 
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+
+  
+
 
   // valores para teste
   temp_ep3 = 9;
@@ -85,21 +113,6 @@ void loop() {
     delay(15);
   }
 
-
-  // TODO: verificar alterações a cada x segs.
   // Em ambiente real, verificação poderia ser a cada 15 mins 
 
-
-  // ######################## sweep
-  for (pos = MIN_ANG_SERVO; pos <= MAX_ANG_SERVO; pos += 1) { // goes from 0 degrees to 170 degrees
-    // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    Serial.println(pos); 
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
-  for (pos = MAX_ANG_SERVO; pos >= MIN_ANG_SERVO; pos -= 1) { // goes from 170 degrees to 0 degrees
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    Serial.println(pos); 
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
 }

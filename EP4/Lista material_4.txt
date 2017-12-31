@@ -3,6 +3,6 @@ Arduino 'Mega 2560'
 Fonte de alimentação externa
 Jumper wires (fios)
 
-LDR
-LED verde
-Resistência ? Ohm
+1x LDR
+1x LED verde
+1x Resistência 220 Ohm

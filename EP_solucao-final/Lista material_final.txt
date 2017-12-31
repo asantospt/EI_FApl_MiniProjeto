@@ -1,6 +1,12 @@
+// INCOMPLETA
 
 Arduino 'Mega 2560'
 Fonte de alimentação externa
 Jumper wires (fios)
 
+1x LED verde
+1x Resistência 220 Ohm
+
+1x LDR
 1x Servomotor
+
