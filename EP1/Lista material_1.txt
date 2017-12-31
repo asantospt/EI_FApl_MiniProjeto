@@ -10,5 +10,5 @@ Resistência 10000 Ohm
 
 Portas Arduino Usadas
 3 -> Sensor ultrassons, Trig
-4 -> Sensor ultrassons, Echo
-8 -> Buzzer
+2 -> Sensor ultrassons, Echo
+4 -> Buzzer

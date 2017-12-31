@@ -11,4 +11,4 @@ Resistência 130 Ohm
 
 Portas Arduino Usadas
 A0 -> sensor QRE1113, pin3
-13 -> R1 (220 Ohm) + LED
+5 -> R1 (220 Ohm) + LED

@@ -11,7 +11,7 @@
  * 5V -> USB
  * GND -> breadboard 
  * A0 -> sensor QRE1113, pin3
- * pin 13 -> R1 (220 Ohm) + LED
+ * pin 5 -> R1 (220 Ohm) + LED
  * 
  * @Sensor de reflexão/proximidade 'QRE1113'
  * pin 1 -> R1 (130 Ohm) + 5V
@@ -27,7 +27,7 @@
 
 // Constantes usadas no programa 
 const int PIN_QRE = A0;
-const int LED_PIN =  13; 
+const int LED_PIN =  5; 
 
 
 //Controle de tempos

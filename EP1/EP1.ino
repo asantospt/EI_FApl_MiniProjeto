@@ -11,14 +11,14 @@
   * 5V -> USB
   * GND -> breadboard
   * Pin 3 -> Sensor ultrassons, Trig
-  * Pin 4 -> Sensor ultrassons, Echo
-  * Pin 8 -> Buzzer
+  * Pin 2 -> Sensor ultrassons, Echo
+  * Pin 4 -> Buzzer
 
   * @Sensor ultrassons 'HC-SR04'
   * VCC -> 5V
   * GND -> GND 
   * Trig -> Arduino, Pin 3
-  * Echo -> Arduino, Pin 4
+  * Echo -> Arduino, Pin 2
   *
   * @Buzzer 
   * + -> Arduino, Pin 8 + R. 10 kOhm
@@ -35,8 +35,8 @@ Tempo para introduzir código de segurança e desligar alarme
 
 // Constantes usadas no programa 
 const int PIN_TRIG = 3;
-const int PIN_ECHO = 4;
-const int PIN_BUZZER = 8;
+const int PIN_ECHO = 2;
+const int PIN_BUZZER = 4;
 // vel. propagação dos ultrassons no ar = 343 m/s 
 // Formula Utilizada Dcm = deltaT / 58,31 cm/MicroSegundo
 const float VEL_ULTRASSONS_AR = 58.31;  

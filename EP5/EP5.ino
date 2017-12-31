@@ -10,7 +10,7 @@
   * LIGAÇÕES: @Arduino 'Mega 2560'
   * 5V -> *USB
   * GND -> breadboard
-  * Pin 10 -> Servo/ Laranja(Sinal)
+  * Pin 1 -> Servo/ Laranja(Sinal)
   * 
   * @Servomotor
   * Laranja(Sinal) -> Arduino/Pin 10
@@ -23,7 +23,7 @@
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
-const int PIN_SERVO = 10;
+const int PIN_SERVO = 1;
 const int MAX_ANG_SERVO = 170;
 const int MIN_ANG_SERVO = 10;
 

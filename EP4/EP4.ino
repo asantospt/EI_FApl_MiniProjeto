@@ -11,7 +11,7 @@
  * 5V -> *USB
  * GND -> breadboard
  * Pin A2 -> LDR + (A2) + R. 22 kOhm
- * Pin 8 -> LED verde
+ * Pin 9 -> LED verde
  * 
  * @LDR
  * + -> 5V
@@ -24,7 +24,7 @@
 
 // Constantes usadas no programa 
 const int PIN_LDR = A2; 
-const int PIN_LED_4 = 8;   
+const int PIN_LED_4 = 9;   
 const float VALOR_MIN_LDR = 4.50;     // valor max. lido (a descoberto) = 4.50 TODO: test leitura
 const float VALOR_MAX_LDR = 2.00;     // valor min. lido (tapado) = 2.00
 

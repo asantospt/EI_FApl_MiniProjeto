@@ -11,7 +11,7 @@ LED Amarelo
 3 Resistência 220 Ohm
 
 Portas Arduino Usadas:
-A1 -> AmpOp
-7 -> Led Vermelho
-6 -> Led Amarelo
-5 -> Led Verde
+A1 -> AmpOp pin 1
+8 -> Led Vermelho
+7 -> Led Amarelo
+6 -> Led Verde

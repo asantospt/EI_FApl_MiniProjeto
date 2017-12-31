@@ -34,23 +34,23 @@
  * 8 -> 5V
  * 
  * @led vervelho
- * + -> R 330 Ohm + pin 10
+ * + -> R 330 Ohm + pin 8
  * - -> GND
 *
  * @led amarelo
- * + -> R 330 Ohm + pin 11
+ * + -> R 330 Ohm + pin 7
  * - -> GND
  *
  * @led verde
- * + -> R 330 Ohm + pin 12
+ * + -> R 330 Ohm + pin 6
  * - -> GND
  */
 
 // Constantes usadas no programa 
 const int PIN_NTC = A1;
-const int LED_PIN_VERMELHO =  7;
-const int LED_PIN_AMARELO =  6;
-const int LED_PIN_VERDE =  5;
+const int LED_PIN_VERMELHO =  8;
+const int LED_PIN_AMARELO =  7;
+const int LED_PIN_VERDE =  6;
 
 // Valores pré-definidos no enunciado
 /**
