@@ -17,8 +17,8 @@
   * @Sensor ultrassons 'HC-SR04'
   * VCC -> 5V
   * GND -> GND 
-  * Trig -> Arduino, Pin 3
-  * Echo -> Arduino, Pin 2
+  * Trig -> Arduino, Pin 2
+  * Echo -> Arduino, Pin 3
   *
   * @Buzzer 
   * + -> Arduino, Pin 8 + R. 10 kOhm
@@ -34,8 +34,8 @@ Tempo para introduzir código de segurança e desligar alarme
 */
 
 // Constantes usadas no programa 
-const int PIN_TRIG = 3;
-const int PIN_ECHO = 2;
+const int PIN_TRIG = 2;
+const int PIN_ECHO = 3;
 const int PIN_BUZZER = 4;
 // vel. propagação dos ultrassons no ar = 343 m/s 
 // Formula Utilizada Dcm = deltaT / 58,31 cm/MicroSegundo
