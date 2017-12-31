@@ -24,7 +24,7 @@
 
 // Constantes usadas no programa 
 const int PIN_LDR = A2; 
-const int PIN_LED_4 = 9;   
+const int PIN_LED_EP4 = 9;   
 const float VALOR_MIN_LDR = 4.50;     // valor max. lido (a descoberto) = 4.50 TODO: test leitura
 const float VALOR_MAX_LDR = 2.00;     // valor min. lido (tapado) = 2.00
 
@@ -41,12 +41,12 @@ void atuarLed();
 void setup() {
   Serial.begin (9600);
   
-  pinMode(PIN_LED_4, OUTPUT);
+  pinMode(PIN_LED_EP4, OUTPUT);
 
   // Acender o LED 2 segs. para teste
-  digitalWrite(PIN_LED_4, HIGH);   
+  digitalWrite(PIN_LED_EP4, HIGH);   
   delay(2000);                  
-  digitalWrite(PIN_LED_4, LOW);     
+  digitalWrite(PIN_LED_EP4, LOW);     
 }
 
 void loop() {

@@ -27,12 +27,7 @@
 
 // Constantes usadas no programa 
 const int PIN_QRE = A0;
-const int LED_PIN =  5; 
-
-
-//Controle de tempos
-//T1: Tempo para primeira identificação de reflexão - Milisegundos
-const int DELTA_T1 = 2000;
+const int PIN_LED_EP2 =  5;
 
 //bool led = 0;
 int contagem = 0;
@@ -59,10 +54,10 @@ Tolerancia = 50 + -
 
 void setup() {
   Serial.begin (9600);
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
+  pinMode(PIN_LED_EP2, OUTPUT);
+  digitalWrite(PIN_LED_EP2, HIGH);
   delay(2000);
-  digitalWrite(LED_PIN, LOW);
+  digitalWrite(PIN_LED_EP2, LOW);
 
 
 }
@@ -86,10 +81,10 @@ void loop() {
     
   if ( (contagem & 1) == 0) {
      //Por o led a High
-     digitalWrite(LED_PIN, LOW);    
+     digitalWrite(PIN_LED_EP2, LOW);    
   }else{
     //Por o led a low
-    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(PIN_LED_EP2, HIGH);
     }
   delay(100);
 }

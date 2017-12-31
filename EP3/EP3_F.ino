@@ -78,6 +78,7 @@ const float TMPOSC = 0.5;
 float tNTCp = 0.0;
 
 // Declaração de funções
+float funcEp3 ();
 
 void setup() {
   Serial.begin (9600);
@@ -95,6 +96,16 @@ void setup() {
 }
 
 void loop() {
+float funcEp3Temp = 0.0;
+funcEp3Temp = funcEp3();
+//para debug
+//Serial.println(funcEp3); 
+
+delay(100);
+
+}
+
+float funcEp3(){
 
   // Leitura do Vout do NTC (V_NTC)
   int sensorValue = analogRead(PIN_NTC);
@@ -136,5 +147,5 @@ void loop() {
   } else {
       digitalWrite(PIN_LED_EP3_VERMELHO, LOW);
     } 
-  delay(100);
+  return tNTC;
 }

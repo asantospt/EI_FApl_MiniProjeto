@@ -12,6 +12,6 @@ LED Amarelo
 
 Portas Arduino Usadas:
 A1 -> AmpOp pin 1
-8 -> Led Vermelho
+6 -> Led Vermelho
 7 -> Led Amarelo
-6 -> Led Verde
+8 -> Led Verde
