@@ -10,7 +10,7 @@
  * LIGAÇÕES: @Arduino 'Mega 2560'
  * 5V -> *USB
  * GND -> breadboard
- * A2 -> LDR + (A2) + R. 22 kOhm
+ * Pin A2 -> LDR + (A2) + R. 22 kOhm
  * Pin 8 -> LED verde
  * 
  * @LDR

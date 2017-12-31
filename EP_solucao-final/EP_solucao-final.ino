@@ -1,7 +1,7 @@
 /** 
  * @file EP_solucao-final.ino
  * @brief SMART HOME: EP1 + EP2 + EP3 + EP4 + EP5
- * @date 21/12
+ * @date 30/12
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
  * @state INC
  */
@@ -10,9 +10,9 @@
   * LIGAÇÕES: @Arduino 'Mega 2560'
   * 5V -> *USB
   * GND -> breadboard
-  * A2 -> LDR + (A2) + R. 22 kOhm       // EP4
-  * Pin 8 -> LED verde                  // EP4
-  * Pin 10 -> Servo/ Laranja(Sinal)     // EP5
+  * Pin A2 -> LDR + (A2) + R. 22 kOhm     // EP4
+  * Pin 8 -> LED verde                    // EP4
+  * Pin 10 -> Servo/ Laranja(Sinal)       // EP5
   * 
   */
 
