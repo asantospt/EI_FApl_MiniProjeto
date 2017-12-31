@@ -26,6 +26,13 @@
  * 4 -> GND
  * 8 -> 5V
  * 
+ *  * Ecrã
+ * 1 -> A1
+ * 2 -> R1 + GND e R2 + AmpOp8032 p1
+ * 3 -> - NTC + R 3600 Ohn, GND
+ * 4 -> GND
+ * 8 -> 5V
+ * 
  * @led vervelho
  * + -> R 330 Ohm + pin 10
  * - -> GND
@@ -41,9 +48,9 @@
 
 // Constantes usadas no programa 
 const int PIN_NTC = A1;
-const int LED_PIN_VERMELHO =  10;
-const int LED_PIN_AMARELO =  11;
-const int LED_PIN_VERDE =  12;
+const int LED_PIN_VERMELHO =  7;
+const int LED_PIN_AMARELO =  6;
+const int LED_PIN_VERDE =  5;
 
 // Valores pré-definidos no enunciado
 /**
