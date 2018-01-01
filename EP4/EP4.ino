@@ -1,14 +1,14 @@
 /** 
  * @file EP4.ino
  * @brief EP4 – Iluminação noturna de presença
- * @date 21/12
+ * @date 31/12
  * @authors @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
  * @state INC
  */
 
 /** 
  * LIGAÇÕES: @Arduino 'Mega 2560'
- * 5V -> *USB
+ * 5V -> USB
  * GND -> breadboard
  * Pin A2 -> LDR + (A2) + R. 22 kOhm
  * Pin 9 -> LED verde
@@ -18,25 +18,24 @@
  * - -> V_out, Arduino/Pin A2
  * 
  * @LED verde
- * + -> R. ? Ohm + Arduino/Pin A2
+ * + -> R. 220 Ohm + Pin 9
  * - -> GND
  */
 
-// Constantes usadas no programa 
+// Atribuição dos pinos do Arduino 
 const int PIN_LDR = A2; 
-const int PIN_LED_EP4 = 9;   
+const int PIN_LED_EP4 = 9;
+
+// Valores pré-definidos 
 const float VALOR_MIN_LDR = 4.50;     // valor max. lido (a descoberto) = 4.50 TODO: test leitura
 const float VALOR_MAX_LDR = 2.00;     // valor min. lido (tapado) = 2.00
-
-// Valores pré-definidos no enunciado
-const int TEMPO_MADRUGADA = 10000;        // (em milissegundos, 10 segundos) Simulação da 04:00 da madrugada
-
-
-const int TOT_PERC_BRILHO = 255;          // Brilho máximo = 255
-const int METADE_PERC_BRILHO = 128;       // Metade do brilho máximo = 127.5
+const int METADE_PERC_BRILHO = 128;   // Metade do brilho máximo = 127.5
+const int TOT_PERC_BRILHO = 255;      // Brilho máximo = 255
+const int TEMPO_MADRUGADA = 10000;    // (em milissegundos, 10 segundos) Simulação da 04:00 da madrugada
 
 // Declaração de funções
 void atuarLed();
+
 
 void setup() {
   Serial.begin (9600);
@@ -71,15 +70,15 @@ void loop() {
   Serial.println(voltageLDR);
 
   if (voltageLDR >= 3.25) {      // valor méd. calculado
-    //digitalWrite(LED_BUILTIN, LOW);  
+    digitalWrite(PIN_LED_EP4, LOW);  
     Serial.println("MUITA LUZ!"); 
   }
   else {
-    //digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(PIN_LED_EP4, HIGH);
     Serial.println("POUCA LUZ!");
   }
 
-  delay(1000);
+  delay(1000);    // TODO: tirar
 }
 
 /**
