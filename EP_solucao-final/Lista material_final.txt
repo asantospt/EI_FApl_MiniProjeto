@@ -1,17 +1,24 @@
-// INCOMPLETA: só ep1 + ep2
+// Lista de material dos 5 EP's
 
-Arduino 'Mega 2560'
+Microcontrolador Arduino Mega 2560
 Fonte de alimentação externa
-Jumper wires (fios)
+Placa de montagem (breadboard)
+Fios condutores elétricos (jumper wires)
 
-Sensor ultrasons HC-SR04
+Sensor de ultrasons HC-SR04
 Buzzer
-Sensor infravermelhos QRE1113
-1x Visor LCD TFT
+Sensor de reflexão QRE1113
+Sensor de temperatura NTC
+Amplificador operacional AD8032
+Sensor de luminosidade LDR
+Servomotor
+Visor LCD TFT
 
-1x LED vermelho
+2x LED vermelho
+1x LED amarelo
+2x LED verde
 2x Resistência 10 kOhm
 4x Resistência 1 kOhm   
 4x Resistência 2 kOhm
 1x Resistência 130 Ohm
-1x Resistência 220 Ohm
+5x Resistência 220 Ohm
