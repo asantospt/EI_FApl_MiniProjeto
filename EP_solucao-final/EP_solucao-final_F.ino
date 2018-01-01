@@ -80,7 +80,36 @@ bool intrusao = 0;
 //Codigo Alarme
 int SECRET = 1234;
 
+//EP2
+// Constantes usadas no programa 
+const int PIN_QRE = A0;
+const int PIN_LED_EP2 =  5;
+
+//bool led = 0;
+int contagem = 0;
+//Variavel para implementar funcionalidade de apenas uma ocorrencia por reflexão
+//ao entrar no range definido só volta a contar depois de sair do range indicado
+bool toogle = 0;
+
+// Valores pré-definidos no enunciado
+/**
+Valor impar se animal está na rua e valor par se estiver em casa
+*/
+
+// Valores de referência - Montagem Inicial
+/**
+sensorValueHIGH: 1000
+sensorValueLOW: 500
+Formula para identificar passagem de animal:
+Valor médio:
+(100+500)/2=750
+Tolerancia = 50 + -
+*/
+
 // Declaração de funções
+void funcEp2();
+// Declaração de funções
+void funcEp1();
 
 void setup() {
   Serial.begin (9600);
@@ -101,10 +130,24 @@ void setup() {
 
   //Acionar o buzzer por 0,5 segundos inicialmente
   tone(PIN_BUZZER, 880,500); 
+
+  //EP2
+  pinMode(PIN_LED_EP2, OUTPUT);
+  digitalWrite(PIN_LED_EP2, HIGH);
+  delay(2000);
+  digitalWrite(PIN_LED_EP2, LOW);
  
 }
 
 void loop() {
+  
+  funcEp1();
+  funcEp2();
+  //para garantir bom funcionamento do sensor ultrasons
+  delay(100);
+}
+
+void funcEp1(){
   //Contar milisegundos desde o arranque do sistema
   float instanteAtual = millis();
 
@@ -170,6 +213,30 @@ void loop() {
     }
     tone(PIN_BUZZER, 880 , 0);
   }
-  //Pequeno delay para garantir bom funcionamento do sensor ultrasons
-  delay(100);
+}
+
+void funcEp2 (){
+    //Ler valor do Sensor
+  int sensorValue = analogRead(PIN_QRE);
+  //degug
+  Serial.println(sensorValue);
+  //debug
+  Serial.println(contagem);
+
+  if(sensorValue > 400 && sensorValue < 850){
+    if(toogle==0){
+        contagem = contagem + 1;
+        toogle = 1;
+    }
+  }else{
+      toogle = 0;
+    }
+    
+  if ( (contagem & 1) == 0) {
+     //Por o led a High
+     digitalWrite(PIN_LED_EP2, LOW);    
+  }else{
+    //Por o led a low
+    digitalWrite(PIN_LED_EP2, HIGH);
+    }
 }

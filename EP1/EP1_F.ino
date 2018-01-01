@@ -81,6 +81,7 @@ bool intrusao = 0;
 int SECRET = 1234;
 
 // Declaração de funções
+void funcEp1();
 
 void setup() {
   Serial.begin (9600);
@@ -105,6 +106,13 @@ void setup() {
 }
 
 void loop() {
+  
+  funcEp1();
+  //para garantir bom funcionamento do sensor ultrasons
+  delay(100);
+}
+
+void funcEp1(){
   //Contar milisegundos desde o arranque do sistema
   float instanteAtual = millis();
 
@@ -170,6 +178,4 @@ void loop() {
     }
     tone(PIN_BUZZER, 880 , 0);
   }
-  //Pequeno delay para garantir bom funcionamento do sensor ultrasons
-  delay(100);
 }
