@@ -3,7 +3,7 @@
  * @brief SMART HOME - EP1 + EP2
  * @date 02/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
- * @state TESTADO! 02/01 - 19.59h    // rever código
+ * @state A FUNCIONAR
  */
 
  /** 
