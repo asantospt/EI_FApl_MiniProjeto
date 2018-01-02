@@ -8,9 +8,9 @@
 
 /** 
  * LIGAÇÕES: @Arduino 'Mega 2560'
- * 5V -> USB
+ * 5 V -> USB
  * GND -> breadboard
- * Pin A2 -> LDR + (A2) + R. 22 kOhm
+ * Pin A2 -> LDR + (A2) + Res. 22 kOhm
  * Pin 9 -> LED verde
  * 
  * @LDR
@@ -18,7 +18,7 @@
  * - -> V_out, Arduino/Pin A2
  * 
  * @LED verde
- * + -> R. 220 Ohm + Pin 9
+ * + -> Res. 220 Ohm + Pin 9
  * - -> GND
  */
 
@@ -35,7 +35,6 @@ const int TEMPO_MADRUGADA = 10000;    // (em milissegundos, 10 segundos) Simula�
 
 // Declaração de funções
 void atuarLed();
-
 
 void setup() {
   Serial.begin (9600);

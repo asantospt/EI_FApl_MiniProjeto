@@ -8,7 +8,7 @@
 
  /** 
   * LIGAÇÕES: @Arduino 'Mega 2560'
-  * 5V -> USB
+  * 5 V -> USB
   * GND -> breadboard
   * Pin 1 -> Servo/ Laranja(Sinal)
   * 
@@ -43,8 +43,7 @@ unsigned long tRef = 0;
 int pos = 0;                 // variável que guarda a posição do servo
 
 void setup() {
-  Serial.begin (9600);
-  
+  Serial.begin (9600);  
   myservo.attach(PIN_SERVO);  
 
   myservo.write(MIN_ANG_SERVO); 
@@ -82,7 +81,7 @@ void loop() {
   }
 
   // debug - valores para teste
-  temp_ep3 = 9;
+  temp_ep3 = 9;           // TODO: receber valores do EP3, mas validá-los antes (dentro de 1 intervalo aceitável)
   luminosidade_ep4 = 90.0;
 
   // Se estiver frio
