@@ -3,7 +3,7 @@
  * @brief SMART HOME - EP1 + EP2
  * @date 03/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
- * @state OK
+ * @state OK; após testes do Professor
  */
 
 /** 
@@ -81,8 +81,8 @@ const float VEL_ULTRASSONS_AR = 58.31;  // Velocidade de propagação dos ultras
 int alarm = 0;       // Varíavel para indicar acionamento do alarme
 int intrusao = 0;    // Varíavel para escrever 1 única vez no ecrã
 int SECRET = 1234;   // Código do Alarme
-float instanteAtual = 0.0;
-int contagem = 0;     // Contador de ocorrências
+float instanteAtual = 0.0;    // Varíavel para guardar o tempo decorrido deste o arranque do Arduino [Milisegundos] 
+int contagem = 0;       // Contador de ocorrências
 int isLocked = 0;       // Varíavel para garantir 1 única ocorrência de cada vez que faz 1 leitura dentro do intervalo definido
 
 // Criar um objeto tft com indicacao dos terminais DC e CS
@@ -140,8 +140,8 @@ void funcEp1() {
     distance = ((float)duration / VEL_ULTRASSONS_AR);  
       
     if (alarm == 0 && distance < DIST_MIN_ALARM) {
-      //Serial.print(distance);     // degug
-      //Serial.println(" cm");      // degug
+      Serial.print(distance);     // degug
+      Serial.println(" cm");      // degug
       Serial.println("Insira codigo de Seguranca ");
       tRef1 = instanteAtual;
       tRef2 = instanteAtual;
@@ -185,9 +185,9 @@ void funcEp2 () {
   int sensorValue = 0;
 
   sensorValue = analogRead(PIN_QRE);        // Ler valor do Sensor
-  // Serial.println(sensorValue);   // degug
-  Serial.print("Num. Ocorrencias "); 
-  Serial.println(contagem);         // debug
+  Serial.println(sensorValue);   // degug
+  //Serial.print("Num. Ocorrencias "); 
+  //Serial.println(contagem);         // debug
 
   if (sensorValue > V_MIN_QRE && sensorValue < V_MAX_QRE) {
     if (isLocked == 0) {
