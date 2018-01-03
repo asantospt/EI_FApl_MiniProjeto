@@ -1,9 +1,10 @@
 /** 
  * @file EP_solucao-final.ino
  * @brief SMART HOME - EP1 + EP2
- * @date 02/01/2018
+ * @date 03/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
- * @state OK
+ * @state OK, antes Aula 1 de Aval.
+ *    // TODO v2: toggle > isLocked
  */
 
  /** 
@@ -81,6 +82,7 @@ const float VEL_ULTRASSONS_AR = 58.31;  // Velocidade de propagação dos ultras
 int alarm = 0;       // Varíavel para indicar acionamento do alarme
 int intrusao = 0;    // Varíavel para escrever 1 única vez no ecrã
 int SECRET = 1234;   // Código do Alarme
+float instanteAtual = 0.0;
 int contagem = 0;     // Contador de ocorrências
 int toogle = 0;       // Varíavel para garantir 1 única ocorrência de cada vez que faz 1 leitura dentro do intervalo definido
 
@@ -125,9 +127,10 @@ void loop() {
 
 void funcEp1() {
   float distance = 0.0;
-  float instanteAtual = millis();       // Contar milisegundos desde o arranque do sistema
   long duration = 0;      // Registar a duração do pulso do echo [Microsegundos]
   int secret = 0;
+
+  instanteAtual = millis();       // Contar milisegundos desde o arranque do sistema
 
   digitalWrite(PIN_TRIG, HIGH);     // Tratar dos Pinos do sensor Ultrasons
   delayMicroseconds(10);
