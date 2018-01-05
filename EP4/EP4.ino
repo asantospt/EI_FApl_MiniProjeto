@@ -26,12 +26,16 @@
 const int PIN_LDR = A2; 
 const int PIN_LED_EP4 = 9;
 
+// Valores pré-definidos no enunciado
+const float MAX_BRILHO_MADRUGADA = 127.5;
+
 // Valores pré-definidos 
 const float VALOR_MIN_LDR = 4.50;     // valor max. lido (a descoberto) = 4.50 TODO: test leitura
 const float VALOR_MAX_LDR = 2.00;     // valor min. lido (tapado) = 2.00
 const int METADE_PERC_BRILHO = 128;   // Metade do brilho máximo = 127.5
-const int TOT_PERC_BRILHO = 255;      // Brilho máximo = 255
-const int TEMPO_MADRUGADA = 10000;    // (em milissegundos, 10 segundos) Simulação da 04:00 da madrugada
+const int MIN_PERC_BRILHO = 0;        // Brilho mínimo = 0
+const int MAX_PERC_BRILHO = 255;      // Brilho máximo = 255  
+const int TEMPO_MADRUGADA = 10000;    // Simulação da 04:00 da madrugada. 10 s [Milissegundos]
 
 // Declaração de funções
 void atuarLed();

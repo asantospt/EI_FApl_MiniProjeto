@@ -17,7 +17,7 @@ Visor LCD TFT
 2x LED vermelho
 1x LED amarelo
 2x LED verde
-2x Resistência 10 kOhm
+3x Resistência 10 kOhm			// 1 delas (LCD/Pin LED) não foi utilizada
 4x Resistência 1 kOhm   
 4x Resistência 2 kOhm
 1x Resistência 130 Ohm
