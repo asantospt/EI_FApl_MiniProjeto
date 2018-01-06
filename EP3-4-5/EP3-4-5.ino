@@ -1,7 +1,7 @@
 /** 
  * @file EP3-4-5.ino
  * @brief SMART HOME - EP3 + EP4 + EP5
- * @date 05/01/2018
+ * @date 06/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
  * @state inc
  */
@@ -30,7 +30,6 @@ void setup() {
   pinMode(PIN_LED_EP3_AMARELO, OUTPUT);
   pinMode(PIN_LED_EP3_VERMELHO, OUTPUT);
   pinMode(PIN_LED_EP4, OUTPUT);
-
 }
 
 void loop() {
@@ -38,9 +37,3 @@ void loop() {
 
 
 }
-
-float funcEp3() {
-
-
-}
-

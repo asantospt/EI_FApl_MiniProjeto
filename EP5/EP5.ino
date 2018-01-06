@@ -1,7 +1,7 @@
 /** 
  * @file EP5.ino
  * @brief EP5 – Abertura automática de estores para controlo de temperatura
- * @date 31/12
+ * @date 06/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
  * @state INC  
  */
@@ -42,6 +42,9 @@ const int ANG_ESTORES_INT = 75;
 unsigned long tRef = 0;
 int pos = 0;                 // variável que guarda a posição do servo
 
+// Declaração de funções
+void funcao_Ep5(float tempEp3);
+
 void setup() {
   Serial.begin (9600);  
   myservo.attach(PIN_SERVO);  
@@ -57,15 +60,18 @@ void setup() {
 
 void loop() {
   unsigned long instanteAtual;
-  int temp_ep3 = 0;
+  float tempEp3 = 0.0;
   float luminosidade_ep4 = 0.0;
 
+  tempEp3 = 9.0;
+  funcao_Ep5(tempEp3);
+
   // TODO: verificar alterações a cada 10 segs.
-  instanteAtual = millis();
+  /*instanteAtual = millis();
   if ((instanteAtual - tRef) >= DELTA_T1) {   
       //ação a executar a cd 10 segs
       tRef = instanteAtual;
-  }
+  }*/
 
   // ######################## testar - sweep
   // goes from 0 degrees to 170 degrees in steps of 1 degree
@@ -79,13 +85,15 @@ void loop() {
     Serial.println(pos); 
     delay(15);                       // waits 15ms for the servo to reach the position
   }
+}
 
+void funcao_Ep5(float tempEp3) {
   // debug - valores para teste
-  temp_ep3 = 9;           // TODO: receber valores do EP3, mas validá-los antes (dentro de 1 intervalo aceitável)
+  /*tempEp3 = 9;           // TODO: receber valores do EP3, mas validá-los antes (dentro de 1 intervalo aceitável)
   luminosidade_ep4 = 90.0;
 
   // Se estiver frio
-  if ((temp_ep3 < T_LIMIAR_1) && (luminosidade_ep4 > T_LIMIAR_LUZ))  {
+  if ((tempEp3 < T_LIMIAR_1) && (luminosidade_ep4 > T_LIMIAR_LUZ))  {
     // angulo 30º - Estores abertos
     myservo.write(ANG_ESTORES_ABERTOS);
     Serial.print("há luz + está frio = ESTORES ABERTOS"); // debug
@@ -93,7 +101,7 @@ void loop() {
     delay(15); 
   }
   // Se estiver calor
-  else if ((temp_ep3 > T_LIMIAR_2) && (luminosidade_ep4 > T_LIMIAR_LUZ)) {
+  else if ((tempEp3 > T_LIMIAR_2) && (luminosidade_ep4 > T_LIMIAR_LUZ)) {
     // angulo 120º - Estores fechados
     myservo.write(ANG_ESTORES_FECHADOS);
     Serial.print("há luz + está calor = ESTORES FECHADOS"); // debug
@@ -107,7 +115,7 @@ void loop() {
     Serial.print("temp entre valores = Estores em posição intermédia"); // debug
     Serial.println(ANG_ESTORES_FECHADOS);     
     delay(15);
-  }
+  }*/
 
   // Em ambiente real, verificação poderia ser a cada 15 mins 
 }
