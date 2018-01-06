@@ -74,7 +74,7 @@ const int TREF1 = 15;
 const int TREF2 = 28;
 const int TREF3 = 30;
 const float TMPOSC = 0.5;
-//para validar se faz print de temperatura no ecrã
+//variavel para print de temperatura no ecrã e serial
 float tNTCp = 0.0;
 
 // Declaração de funções
