@@ -16,7 +16,7 @@ const int PIN_SERVO = 1;
 const int PIN_LED_EP3_VERDE = 6;      // verde
 const int PIN_LED_EP3_AMARELO = 7;    // amarelo
 const int PIN_LED_EP3_VERMELHO = 8;   // vermelho
-const int PIN_LED_EP4 = 4;            // verde, TODO: Mega/Pin 9
+const int PIN_LED_EP4 = 5;            // verde, TODO: Mega/Pin 9 PWM IMPORTANTE
 
 // Declaração de valores pré-definidos no enunciado
 const int MIN_PERC_BRILHO = 0;        // Brilho mín., quando "luz ambiente normal"
