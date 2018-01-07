@@ -1,0 +1,15 @@
+
+Microcontrolador Arduino Mega 2560
+Fonte de alimentação externa
+Placa de montagem (breadboard)
+Fios condutores elétricos (jumper wires)
+
+1x Sensor de temperatura NTC
+1x AmpOp 8032
+1x Sensor de luminosidade LDR
+1x Servomotor
+
+1x LED vermelho
+1x LED Amarelo
+2x LED verde
+4x Resistência 220 Ohm

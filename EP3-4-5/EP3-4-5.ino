@@ -6,25 +6,25 @@
  * @state inc
  */
 
-// Bibliotecas extra usadas
+// Declaração de bibliotecas extra
 #include <Servo.h>
 
-// Atribuição dos pinos do Arduino 
+// Atribuição dos pinos do 'Arduino Mega 2560'
 const int PIN_NTC = A1; 
 const int PIN_LDR = A2; 
 const int PIN_SERVO = 1;
 const int PIN_LED_EP3_VERDE = 6;      // verde
 const int PIN_LED_EP3_AMARELO = 7;    // amarelo
 const int PIN_LED_EP3_VERMELHO = 8;   // vermelho
-const int PIN_LED_EP4 = 4;            // verde, TODO: Mega 9
+const int PIN_LED_EP4 = 4;            // verde, TODO: Mega/Pin 9
 
-// Valores pré-definidos no enunciado
+// Declaração de valores pré-definidos no enunciado
 const int MIN_PERC_BRILHO = 0;        // Brilho mín., quando "luz ambiente normal"
 const int MAX_PERC_BRILHO = 255;      // Brilho máx., quando "ausência de luz"
 const int MAX_BRILHO_MADRUGADA = 128;     // Metade do brilho máximo = 127.5
 const int DELTA_T3 = 10000;               // 10 s para simular as 04:00h da madrugada [Segundos]  
 
-// Variáveis globais do programa        // TODO: org
+// Declaração de váriáveis globais       // TODO: org
 const float GANHO_NTC = 1.75;
 const int R1 = 3600;
 const int VIN = 5;

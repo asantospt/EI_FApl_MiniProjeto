@@ -1,9 +1,10 @@
 /** 
- * @file EP3-4-5.ino
- * @brief SMART HOME - EP3 + EP4 + EP5
- * @date 06/01/2018
+ * @file EP1-2-3-4-5.ino
+ * @brief SMART HOME: implementação das 5 EP's em simultâneo. LCD a funcionar com EP1
+ * @date 07/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
- * @state inc
+ * @state inc; por testar
+ *      TODO: tirar LCD do EP3; faltam exs. da AULA2
  */
 
 // Bibliotecas extra usadas
@@ -71,12 +72,10 @@ int contagem = 0;       // Contador de ocorrências
 int isLocked = 0;       // Varíavel para garantir 1 única ocorrência de cada vez que faz 1 leitura dentro do intervalo definido
 
 // Declaração de funções
-float funcEp3();
-void funcEp5(float Ep3Temp);
-
-//EP1 + 2
 void funcEp1();
 void funcEp2();
+float funcEp3();
+void funcEp5(float Ep3Temp);
 
 void setup() {
   Serial.begin (9600);
@@ -132,64 +131,6 @@ void loop() {
   funcEp2();        // Função com funcionalidades do EP2
 
   delay(100);
-
-}
-
-float funcEp3(){
-
-  // Leitura do Vout do NTC (V_NTC)
-  int sensorValue = analogRead(PIN_NTC);
-  
-  // Converter leitura analogica para voltagem
-  float voltage = sensorValue * (5.0 / 1023.0);
-  //para Debug
-  //Serial.println(voltage); 
-
-  //Calcular rNTC
-  float rNTC = (( R1 * 5) / (voltage / GANHO_NTC)) - R1;
-  //calcular temp cº
-  float tNTC = 1.0 / ((1.0 / T0) + ((1.0 / BETA) * log(rNTC / R0))) - KELVIN + 20; 
-  //para debug
-  //Serial.println(tNTC);
-
-  //Fazer print da temperatura se alteraç\ao de 0,5 graus
-  if(tNTC > (tNTCp + TMPOSC) || tNTC < (tNTCp - TMPOSC) ){
-    tNTCp = tNTC;
-    Serial.print("Temperatura Cº: ");
-    Serial.println(tNTCp);
-    //escrever para o ecrã
-    tft.fillScreen(ILI9341_BLACK); 
-    tft.setCursor(0, 100);
-    tft.setTextColor(ILI9341_RED); 
-    tft.setTextSize(2);
-    tft.print("Temperatura ");
-    tft.print(tNTCp);
-    tft.println(" C");
-
-  } 
-
-    // LED - Verde
-  if (tNTC <= TREF1) {
-    digitalWrite(PIN_LED_EP3_VERDE, HIGH);
-  } else {
-      digitalWrite(PIN_LED_EP3_VERDE, LOW);
-    }
-  // LED - Amarelo
-  if (tNTC > TREF2 && tNTC <= TREF3) {
-    digitalWrite(PIN_LED_EP3_AMARELO, HIGH);
-  } else {
-      digitalWrite(PIN_LED_EP3_AMARELO, LOW);
-    }
-  // LED - Vermelho
-  if (tNTC > TREF3) {
-    digitalWrite(PIN_LED_EP3_VERMELHO, HIGH);
-  } else {
-      digitalWrite(PIN_LED_EP3_VERMELHO, LOW);
-    } 
-  return tNTC;
-}
-
-void funcEp5(float Ep3Temp){
 
 }
 
@@ -275,3 +216,60 @@ void funcEp2 () {
   }
 }
 
+float funcEp3(){
+
+  // Leitura do Vout do NTC (V_NTC)
+  int sensorValue = analogRead(PIN_NTC);
+  
+  // Converter leitura analogica para voltagem
+  float voltage = sensorValue * (5.0 / 1023.0);
+  //para Debug
+  //Serial.println(voltage); 
+
+  //Calcular rNTC
+  float rNTC = (( R1 * 5) / (voltage / GANHO_NTC)) - R1;
+  //calcular temp cº
+  float tNTC = 1.0 / ((1.0 / T0) + ((1.0 / BETA) * log(rNTC / R0))) - KELVIN + 20; 
+  //para debug
+  //Serial.println(tNTC);
+
+  //Fazer print da temperatura se alteraç\ao de 0,5 graus
+  if(tNTC > (tNTCp + TMPOSC) || tNTC < (tNTCp - TMPOSC) ){
+    tNTCp = tNTC;
+    Serial.print("Temperatura Cº: ");
+    Serial.println(tNTCp);
+    //escrever para o ecrã
+    tft.fillScreen(ILI9341_BLACK); 
+    tft.setCursor(0, 100);
+    tft.setTextColor(ILI9341_RED); 
+    tft.setTextSize(2);
+    tft.print("Temperatura ");
+    tft.print(tNTCp);
+    tft.println(" C");
+
+  } 
+
+    // LED - Verde
+  if (tNTC <= TREF1) {
+    digitalWrite(PIN_LED_EP3_VERDE, HIGH);
+  } else {
+      digitalWrite(PIN_LED_EP3_VERDE, LOW);
+    }
+  // LED - Amarelo
+  if (tNTC > TREF2 && tNTC <= TREF3) {
+    digitalWrite(PIN_LED_EP3_AMARELO, HIGH);
+  } else {
+      digitalWrite(PIN_LED_EP3_AMARELO, LOW);
+    }
+  // LED - Vermelho
+  if (tNTC > TREF3) {
+    digitalWrite(PIN_LED_EP3_VERMELHO, HIGH);
+  } else {
+      digitalWrite(PIN_LED_EP3_VERMELHO, LOW);
+    } 
+  return tNTC;
+}
+
+void funcEp5(float Ep3Temp){
+
+}
