@@ -26,27 +26,24 @@ Servo myservo;            // Criação de 1 objeto para controlar o Servo
 const int PIN_SERVO = 1;
 
 // Valores pré-definidos no enunciado 
-
-// Valores pré-definidos 
-const int MIN_ANG_SERVO = 10;
-const int MAX_ANG_SERVO = 170;
-const float T_LIMIAR_1 = 15.0;              // Temperatura considerado como 'Frio'
-const float T_LIMIAR_2 = 30.0;              // Temperatura considerado como 'Calor'
-const float T_LIMIAR_LUZ = 80.0;            // Valor para incidência de luz solar
-            // TODO: medir valores
-//const int DELTA_T1 = 10000;
 const int ANG_ESTORES_ABERTOS = 30; 
 const int ANG_ESTORES_INT = 75;
 const int ANG_ESTORES_FECHADOS = 120; 
 
 // Variáveis globais do programa
-int posServo = 0;                 // Variável que guarda a posição do servo
+const int MIN_ANG_SERVO = 10;         // Definição do ângulo mín. a enviar para o Servo, por segurança
+const int MAX_ANG_SERVO = 170;        // Definição do ângulo máx. a enviar para o Servo, por segurança
+const float T_LIMIAR_1 = 10.0;              // Temperatura considerado como 'Frio'
+const float T_LIMIAR_2 = 28.0;              // Temperatura considerado como 'Calor'
+const float T_LIMIAR_LUZ = 80.0;            // Valor para incidência de luz solar
+            // TODO: medir valores
+int posServo = 0;                 // Variável que guarda a posição do Servo [Graus]
 
 // Declaração de funções
-void funcao_Ep5(float tempEp3);
+void funcao_Ep5(float temp_Ep3, float voltageLDR_Ep4);
 
 void setup() {
-  Serial.begin (9600);  
+  Serial.begin(9600);  
   myservo.attach(PIN_SERVO);  
 
   myservo.write(MIN_ANG_SERVO); 
@@ -56,15 +53,17 @@ void setup() {
   myservo.write(MIN_ANG_SERVO); 
   Serial.println("Teste servo - na posição 10º");   // debug
   delay(15);  
+
+  delay(1000);
 }
 
 void loop() {
-  unsigned long instanteAtual;
-  float tempEp3 = 0.0;
-  float luminosidade_ep4 = 0.0;
+  float temp_Ep3 = 0.0;
+  float voltageLDR_Ep4 = 0.0;
 
-  /*tempEp3 = 9.0;
-  funcao_Ep5(tempEp3);*/
+  temp_Ep3 = 9.0;          // 2x debug
+  voltageLDR_Ep4 = 2.0;
+  //funcao_Ep5(temp_Ep3, voltageLDR_Ep4);     // EP5 precisa de receber valores lidos na EP3 e na EP4
 
   // ######################## testar - sweep
   // goes from 0 degrees to 170 degrees in steps of 1 degree
@@ -73,20 +72,28 @@ void loop() {
     Serial.println(posServo); 
     delay(15);                       // waits 15ms for the servo to reach the position
   }
-  for (posServo = MAX_ANG_SERVO; posServo >= MIN_ANG_SERVO; posServo -= 1) { // goes from 170 degrees to 0 degrees
+  /*for (posServo = MAX_ANG_SERVO; posServo >= MIN_ANG_SERVO; posServo -= 1) { // goes from 170 degrees to 0 degrees
     myservo.write(posServo);              // tell servo to go to position in variable 'posServo'
     Serial.println(posServo); 
     delay(15);                       // waits 15ms for the servo to reach the position
-  }
+  }*/
 }
 
-void funcao_Ep5(float tempEp3) {
-  // debug - valores para teste
-             // TODO: receber valores do EP3, mas validá-los antes (dentro de 1 intervalo aceitável)
-  float luminosidade_ep4 = 90.0;
+/**
+ * @brief Recebe a temperatura e a luminosidade da casa e altera a posição dos estores
+ * @params Temperatura (EP3), Voltagem da LRD (EP4)
+ * @return -
+ */
+void funcao_Ep5(float temp_Ep3, float voltageLDR_Ep4) {
+  float temp_Entrada = 0.0;
+  float voltageLDR_Entrada = 0.0;
+  // TODO: receber valores do EP3+EP4, mas validá-los antes (dentro de 1 intervalo aceitável)
+
+  temp_Entrada = temp_Ep3;
+  voltageLDR_Entrada = voltageLDR_Ep4;
 
   // Se estiver frio
-  if ((tempEp3 < T_LIMIAR_1) && (luminosidade_ep4 > T_LIMIAR_LUZ))  {
+  if ((temp_Entrada < T_LIMIAR_1) && (voltageLDR_Entrada > T_LIMIAR_LUZ))  {
     // angulo 30º - Estores abertos
     myservo.write(ANG_ESTORES_ABERTOS);
     Serial.print("há luz + está frio = ESTORES ABERTOS"); // debug
@@ -94,7 +101,7 @@ void funcao_Ep5(float tempEp3) {
     delay(15); 
   }
   // Se estiver calor
-  else if ((tempEp3 > T_LIMIAR_2) && (luminosidade_ep4 > T_LIMIAR_LUZ)) {
+  else if ((temp_Entrada > T_LIMIAR_2) && (voltageLDR_Entrada > T_LIMIAR_LUZ)) {
     // angulo 120º - Estores fechados
     myservo.write(ANG_ESTORES_FECHADOS);
     Serial.print("há luz + está calor = ESTORES FECHADOS"); // debug

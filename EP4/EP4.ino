@@ -41,7 +41,7 @@ unsigned long tRef3 = 0;              // Varíavel para guardar tempo de referê
 boolean isMadrugada = false;             
 
 // Declaração de funções
-void funcao_Ep4(int maxBrilho);
+float funcao_Ep4(int maxBrilho);
 
 void setup() {
   Serial.begin(9600);
@@ -55,6 +55,8 @@ void setup() {
 }
 
 void loop() {
+  float voltageLDR_Ep4 = 0.0;
+
   instanteAtual_Ep4 = millis();       // Contar milisegundos desde o arranque do sistema
 
   if (((instanteAtual_Ep4 - tRef3) >= DELTA_T3) && isMadrugada == false) {        
@@ -62,48 +64,67 @@ void loop() {
     tRef3 = instanteAtual_Ep4;
     isMadrugada = true;
       Serial.println("** passaram 10 s desde arranque. F-Madrugada!!");   // debug
-    funcao_Ep4(MAX_BRILHO_MADRUGADA);
+    voltageLDR_Ep4 = funcao_Ep4(MAX_BRILHO_MADRUGADA);
   } else {
-    funcao_Ep4(MAX_PERC_BRILHO);
+    voltageLDR_Ep4 = funcao_Ep4(MAX_PERC_BRILHO);
   }
+
+  Serial.print("voltage LDR-EP4 no Loop: ");    // 2 debug
+  Serial.println(voltageLDR_Ep4); 
 }
 
 /**
- * @brief Recebe o brilho máximo a aplicar, lê luminosidade existente e atua sobre o brilho de um LED
+ * @brief Recebe o brilho máximo a aplicar, lê a luminosidade existente e atua sobre o sistema de iluminação
  * @params Valor máximo do brilho, em função da hora
- * @return -
+ * @return Valor da luminosidade
  */
-void funcao_Ep4(int maxBrilho) {
+float funcao_Ep4(int maxBrilho) {
   int sensorValueLDR = 0;
   float voltageLDR = 0.0;
   float declive = 0.0;
   int maxBrilhoEntradaFuncao = 0;
   int brilhoLED = 0;
 
+  analogWrite(PIN_LED_EP4, 100);    // debug
+  delay(500);
+  analogWrite(PIN_LED_EP4, 200);    
+  delay(500);
+
   maxBrilhoEntradaFuncao = maxBrilho; 
-    //Serial.println(sensorValueLDR);     // debug
+  //Serial.println(maxBrilhoEntradaFuncao);     // debug
+
+  //Serial.println(sensorValueLDR);     // debug
   sensorValueLDR = analogRead(PIN_LDR);
   //Serial.println(sensorValueLDR);      // debug
 
   voltageLDR = sensorValueLDR * (5.0 / 1023.0);     // Conversão da leitura analógica (0-1023) para uma voltagem (0-5 V) 
-  Serial.println(voltageLDR);      // debug
+  //Serial.println(voltageLDR);      // debug
 
   /* 
-  x = luminosidade LDR (VALOR_MIN_LUZ, VALOR_MAX_LUZ)
-  y = brilho LED (MIN_PERC_BRILHO, MAX_PERC_BRILHO ou MAX_BRILHO_MADRUGADA)
+  x = Luminosidade LDR (VALOR_MIN_LUZ, VALOR_MAX_LUZ)
+  y = Brilho LED (MIN_PERC_BRILHO, MAX_PERC_BRILHO ou MAX_BRILHO_MADRUGADA)
   Declive: m = (y1 - y0) / (x1 - x0) 
   Equação da reta: y = y0 + m(x - x0)   */
-  /*declive = (float)(maxBrilho - MIN_PERC_BRILHO) / (VALOR_MAX_LUZ - VALOR_MIN_LUZ);
+  declive = (maxBrilhoEntradaFuncao - MIN_PERC_BRILHO) / (VALOR_MAX_LUZ - VALOR_MIN_LUZ);
        // maxBrilho é o valor máx. da luminosidade, em função da hora do dia
-  brilhoLED = (int) 0 + declive * (sensorValueLDR - VALOR_MIN_LUZ);*/
+  brilhoLED = 0 + (declive * (voltageLDR - VALOR_MIN_LUZ)); 
+  analogWrite(PIN_LED_EP4, brilhoLED);
+  Serial.print("brilhoLED: "); 
+  Serial.println(brilhoLED);
 
-  brilhoLED = map(voltageLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
+
+  /*brilhoLED = map(voltageLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
   if (brilhoLED > MIN_PERC_BRILHO || brilhoLED < maxBrilhoEntradaFuncao) {      // Só quando deve alterar brilho do LED
     analogWrite(PIN_LED_EP4, brilhoLED);
     // OU constrain(yout, y0, y1);
     // constrain(brilhoLED, y0, y1);
-  }  
+  }  */
 
-    //Serial.println(maxBrilho);     // debug
+  /*
+  intensidadeLed = (LED_MAX / (LDR_S_LUZ - LDR_C_LUZ)) * (sensorValue - LDR_C_LUZ);
+  intensidadeLed = constrain(intensidadeLed, LED_MIN, LED_MAX);*/
+
     //Serial.println("** luz a metade!");     // debug
+
+  return voltageLDR;
 }
