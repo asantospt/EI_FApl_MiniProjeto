@@ -25,7 +25,7 @@ const int MAX_BRILHO_MADRUGADA = 128;     // Metade do brilho máximo = 127.5
 const int DELTA_T3 = 10000;               // 10 s para simular as 04:00h da madrugada [Segundos]  
 
 // Declaração de váriáveis globais       // TODO: org
-const float GANHO_NTC = 1.75;
+const float GANHO_NTC = 1.66;
 const int R1 = 3600;
 const int VIN = 5;
 const float T0 = 298.15;// 25ºC
@@ -108,7 +108,7 @@ float funcEp3(){
   //Calcular rNTC
   float rNTC = (( R1 * 5) / (voltage / GANHO_NTC)) - R1;
   //calcular temp cº
-  float tNTC = 1.0 / ((1.0 / T0) + ((1.0 / BETA) * log(rNTC / R0))) - KELVIN + 20; 
+  float tNTC = 1.0 / ((1.0 / T0) + ((1.0 / BETA) * log(rNTC / R0))) - KELVIN; 
   //para debug
   //Serial.println(tNTC);
 
