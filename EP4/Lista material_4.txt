@@ -5,4 +5,4 @@ Jumper wires (fios)
 
 1x LDR
 1x LED verde
-1x Resistência 220 Ohm
+1x Resistência 330 Ohm
