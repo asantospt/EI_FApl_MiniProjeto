@@ -1,7 +1,7 @@
-
-Arduino 'Mega 2560'
+Microcontrolador Arduino Mega 2560
 Fonte de alimentação externa
-Jumper wires (fios)
+Placa de montagem (breadboard)
+Fios condutores elétricos (jumper wires)
 
 1x LDR
 1x LED verde

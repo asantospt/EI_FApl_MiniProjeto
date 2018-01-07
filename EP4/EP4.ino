@@ -98,7 +98,7 @@ void loop() {
 int funcao_Ep4(int maxBrilho) {
   int sensorValueLDR = 0;
   //float voltageLDR = 0.0;
-  float declive = 0.0;
+  int declive = 0;
   int maxBrilhoEntradaFuncao = 0;
   int brilhoLED = 0;
 
@@ -112,10 +112,10 @@ int funcao_Ep4(int maxBrilho) {
    * sensorValueLDR: min: 250; max: 1000
    * voltageLDR: min: 2.1; max: 4.9
    */
-  /**
+  /** 
    * Valores lidos c/ LDR do Labº:
    * sensorValueLDR: min: ; max: 
-   * voltageLDR: min: ; max: 
+   * voltageLDR: min: 2.00; max: 4.50   (no RP3-c)
    */
 
   sensorValueLDR = analogRead(PIN_LDR);     
@@ -136,13 +136,15 @@ int funcao_Ep4(int maxBrilho) {
        // maxBrilho é o valor máx. da luminosidade, em função da hora do dia
   brilhoLED = 0 + (declive * (sensorValueLDR - VALOR_MAX_LUZ)); 
   // brilhoLED = (maxBrilhoEntradaFuncao / (VALOR_MIN_LUZ - VALOR_MAX_LUZ)) * (sensorValueLDR - VALOR_MAX_LUZ);
-  brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
+  
+  //brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
   analogWrite(PIN_LED_EP4, brilhoLED);
+  delay(30);       // Esperar 30 ms para ser o efeito da alteração do brilho do LED [Milisegundos]
   Serial.print("brilhoLED: "); 
   Serial.println(brilhoLED);
   Serial.print(" ");
 
-  // OLD: com map() 
+  // OLD: com função map() 
   /*brilhoLED = map(voltageLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
   if (brilhoLED > MIN_PERC_BRILHO || brilhoLED < maxBrilhoEntradaFuncao) {      // Só quando deve alterar brilho do LED
     analogWrite(PIN_LED_EP4, brilhoLED);

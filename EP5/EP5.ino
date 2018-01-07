@@ -35,7 +35,7 @@ const int MIN_ANG_SERVO = 10;         // Definição do ângulo mín. a enviar p
 const int MAX_ANG_SERVO = 170;        // Definição do ângulo máx. a enviar para o Servo, por segurança
 const float T_LIMIAR_1 = 10.0;              // Temperatura considerado como 'Frio'
 const float T_LIMIAR_2 = 28.0;              // Temperatura considerado como 'Calor'
-const float T_LIMIAR_LUZ = 80.0;            // Valor para incidência de luz solar
+const float T_LIMIAR_LUZ = 700.0;            // Valor para incidência de luz solar
             // TODO: medir valores
 int posServo = 0;                 // Variável que guarda a posição do Servo [Graus]
 
@@ -62,7 +62,7 @@ void loop() {
   float voltageLDR_Ep4 = 0.0;
 
   temp_Ep3 = 9.0;          // 2x debug
-  voltageLDR_Ep4 = 2.0;
+  voltageLDR_Ep4 = 500.0;
   //funcao_Ep5(temp_Ep3, voltageLDR_Ep4);     // EP5 precisa de receber valores lidos na EP3 e na EP4
 
   // ######################## testar - sweep
