@@ -33,7 +33,7 @@ const int MAX_BRILHO_MADRUGADA = 128;     // Metade do brilho máximo = 127.5
 const int DELTA_T4 = 10000;               // 10 s para simular as 04:00h da madrugada [Segundos]  
 
 // Variáveis globais do programa
-const int VALOR_MIN_LUZ = 50;       // Valor min. de voltagem (LDR tapada) =       
+const int VALOR_MIN_LUZ = 50;        // Valor min. de voltagem (LDR tapada) =       
 const int VALOR_MAX_LUZ = 1000;      // Valor máx. de voltagem (LDR a descoberta) =     
 const int TEMPO_MADRUGADA = 10000;     // Simulação da 04:00 da madrugada. 10 s [Milissegundos]
 unsigned long instanteAtual_Ep4 = 0;
