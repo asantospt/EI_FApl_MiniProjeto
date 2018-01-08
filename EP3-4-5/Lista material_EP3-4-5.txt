@@ -4,21 +4,16 @@ Fonte de alimentação externa
 Placa de montagem (breadboard)
 Fios condutores elétricos (jumper wires)
 
-
-
-
 1x Sensor de temperatura NTC
-1 Resistencia 3.6k Ohm
 1x AmpOp 8032
-1 Resistência 1k Ohm
-1 Resistencia 1.5k Ohm
-
 1x Sensor de luminosidade LDR
-1 Resistencia 22k Ohm
-
 1x Servomotor
 
-1x LED vermelho
+1x LED Vermelho
 1x LED Amarelo
-2x LED verde
+2x LED Verde
+1x Resistência 22 kOhm
+1x Resistência 3.6 kOhm
+1x Resistência 1.5 kOhm
+1x Resistência 1 kOhm
 4x Resistência 330 Ohm

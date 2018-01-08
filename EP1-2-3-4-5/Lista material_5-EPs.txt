@@ -1,5 +1,3 @@
-// TODO: faltam ep3; confirmar restantes
-
 Microcontrolador Arduino Mega 2560
 Fonte de alimentação externa
 Placa de montagem (breadboard)
@@ -8,15 +6,64 @@ Fios condutores elétricos (jumper wires)
 1x Sensor de ultrasons HC-SR04
 1x Buzzer
 1x Sensor de reflexão QRE1113
+1x Sensor de temperatura NTC
+1x AmpOp 8032
 1x LDR
 1x Servomotor
 1x Visor LCD TFT
 
-1x LED vermelho
-1x LED verde
-
+2x LED Vermelho
+1x LED Amarelo
+2x LED Verde
+1x Resistência 22 kOhm
 3x Resistência 10 kOhm		// 1 delas (LCD/Pin LED) não foi utilizada
-4x Resistência 1 kOhm   
+1x Resistência 3.6 kOhm
+1x Resistência 1.5 kOhm
+5x Resistência 1 kOhm   
 4x Resistência 2 kOhm
 1x Resistência 130 Ohm
-2x Resistência 330 Ohm
+5x Resistência 330 Ohm
+
+
+
+// ------------------ MATERIAL POR EP ------------------------
+// ------------------ EP 1 ------------------------
+1x Sensor de ultrasons HC-SR04
+1x Buzzer
+1x Resistência 10 kOhm
+
+1x Visor LCD TFT
+1x Resistência 10 kOhm		
+4x Resistência 1 kOhm   
+4x Resistência 2 kOhm
+
+// ------------------ EP 2 ------------------------
+1x Sensor de reflexão QRE1113
+1x Resistência 10 kOhm		
+1x Resistência 130 Ohm
+
+1x LED Vermelho
+1x Resistência 330 Ohm
+
+// ------------------ EP 3 ------------------------
+1x Sensor de temperatura NTC
+1x Resistência 3.6 kOhm
+
+1x AmpOp 8032
+1x Resistência 1 kOhm
+1x Resistência 1.5 kOhm
+
+1x LED Vermelho
+1x LED Amarelo
+1x LED Verde
+3x Resistência 330 Ohm
+
+// ------------------ EP 4 ------------------------
+1x LDR
+1x Resistência 22 kOhm
+
+1x LED Verde
+1x Resistência 330 Ohm
+
+// ------------------ EP 5 ------------------------
+1x Servomotor

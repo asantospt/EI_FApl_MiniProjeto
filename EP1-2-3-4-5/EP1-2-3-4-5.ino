@@ -22,7 +22,7 @@ Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 // Atribuição dos pinos do Arduino 
 const int PIN_NTC = A1; 
 const int PIN_LDR = A2; 
-const int PIN_SERVO = 1;
+const int PIN_SERVO = 10;
 const int PIN_LED_EP3_VERDE = 6;      // verde
 const int PIN_LED_EP3_AMARELO = 7;    // amarelo
 const int PIN_LED_EP3_VERMELHO = 8;   // vermelho

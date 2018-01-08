@@ -1,7 +1,7 @@
 /** 
  * @file EP5.ino
  * @brief EP5 – Abertura automática de estores para controlo de temperatura
- * @date 06/01/2018
+ * @date 07/01/2018
  * @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
  * @state INC  
  */
@@ -23,7 +23,7 @@
 Servo myservo;            // Criação de 1 objeto para controlar o Servo
 
 // Atribuição dos pinos do Arduino
-const int PIN_SERVO = 1;
+const int PIN_SERVO = 10;
 
 // Valores pré-definidos no enunciado 
 const int ANG_ESTORES_ABERTOS = 30; 
@@ -35,8 +35,7 @@ const int MIN_ANG_SERVO = 10;         // Definição do ângulo mín. a enviar p
 const int MAX_ANG_SERVO = 170;        // Definição do ângulo máx. a enviar para o Servo, por segurança
 const float T_LIMIAR_1 = 10.0;              // Temperatura considerado como 'Frio'
 const float T_LIMIAR_2 = 28.0;              // Temperatura considerado como 'Calor'
-const float T_LIMIAR_LUZ = 700.0;            // Valor para incidência de luz solar
-            // TODO: medir valores
+const int T_LIMIAR_LUZ = 700;            // Valor para incidência de luz solar
 int posServo = 0;                 // Variável que guarda a posição do Servo [Graus]
 
 // Declaração de funções
