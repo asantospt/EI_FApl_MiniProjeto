@@ -22,7 +22,7 @@ const int PIN_SERVO = 10;
 const int MIN_PERC_BRILHO = 0;        // Brilho mín., quando "luz ambiente normal"
 const int MAX_PERC_BRILHO = 255;      // Brilho máx., quando "ausência de luz"
 const int MAX_BRILHO_MADRUGADA = 128;     // Metade do brilho máximo = 127.5
-const int DELTA_T3 = 10000;               // 10 s para simular as 04:00h da madrugada [Segundos]  
+const int DELTA_T4 = 10000;               // 10 s para simular as 04:00h da madrugada [Segundos] 
 
 // Declaração de váriáveis globais       // TODO: org
 // ---------------- EP 3 ----------------
@@ -41,11 +41,10 @@ const float TMPOSC = 0.5;
 float tNTCp = 0.0;
 
 // ---------------- EP 4 ----------------
-const float VALOR_MIN_LUZ = 3.7;       // Valor min. de voltagem (LDR tapada) = 2.00   
-const float VALOR_MAX_LUZ = 4.58;      // Valor máx. de voltagem (LDR a descoberta) = 4.50 
+const int VALOR_MIN_LUZ = 50;       // Valor min. de voltagem (LDR sem receber luz)   
+const int VALOR_MAX_LUZ = 1000;      // Valor máx. de voltagem (LDR a receber muita luz)      
 const int TEMPO_MADRUGADA = 10000;     // Simulação da 04:00 da madrugada. 10 s [Milissegundos]
 unsigned long instanteAtual_Ep4 = 0;
-boolean isMadrugada = false; 
 
 // ---------------- EP 5 ----------------
 const int MIN_ANG_SERVO = 10;
@@ -60,8 +59,7 @@ Servo myservo;
 
 // Declaração de funções
 float funcEp3();
-float funcao_Ep4(int maxBrilho);
-void funcao_Ep5(float temp_Ep3, int voltageLDR_Ep4);
+float funcaoEp4(int maxBrilho);
 
 void setup() {
   Serial.begin (9600);  
@@ -86,15 +84,19 @@ void setup() {
 
 void loop() {
   float funcEp3Temp = 0.0;
-  float voltageLDR_Ep4 = 0.0;
+  int sensorValueLDR_Ep4 = 0;
 
-  funcEp3Temp = funcEp3();       // Função com funcionalidades do EP3
+  instanteAtual_Ep4 = millis();       // Contar milisegundos desde o arranque do sistema
 
-  // TODO: implementar EP4
-  voltageLDR_Ep4 = funcao_Ep4(MAX_PERC_BRILHO);   // Função com funcionalidades do EP4
+  funcEp3Temp = funcEp3();        // Função com funcionalidades do EP3
 
-  // TODO: implementar EP5
-  funcao_Ep5(funcEp3Temp, voltageLDR_Ep4);    // Função com funcionalidades do EP5
+  if (instanteAtual_Ep4 >= DELTA_T4) {      
+    // Já passaram os 10 s desde o arranque do programa, significa que já é 'madrugada'
+    Serial.println(">>> Passaram 10 s desde arranque. Madrugada!! <<<");       // debug
+    sensorValueLDR_Ep4 = funcaoEp4(MAX_BRILHO_MADRUGADA);         // Função com funcionalidades do EP4
+  } else {
+    sensorValueLDR_Ep4 = funcaoEp4(MAX_PERC_BRILHO);
+  }
 
   delay(100);     
 }
@@ -144,18 +146,32 @@ float funcEp3(){
   return tNTC;
 }
 
-float funcao_Ep4(int maxBrilho) {
+/**
+ * @brief Recebe o brilho máximo a aplicar, lê a luminosidade existente e atua sobre o sistema de iluminação
+ * @params Valor máximo do brilho, em função da hora
+ * @return Valor da luminosidade
+ */
+int funcaoEp4(int maxBrilho) {
+  int sensorValueLDR = 0;
+  int declive = 0;
+  int maxBrilhoEntradaFuncao = 0;
+  int brilhoLED = 0;
 
-  return voltageLDR;
-}
+  maxBrilhoEntradaFuncao = maxBrilho;
 
-void funcao_Ep5(float temp_Ep3, int voltageLDR_Ep4) {
-  float temp_Entrada = 0.0;
-  int voltageLDR_Entrada = 0;
+  sensorValueLDR = analogRead(PIN_LDR);     
+  Serial.print("sensorValueLDR: ");
+  Serial.println(sensorValueLDR);      // debug
 
-  temp_Entrada = temp_Ep3;
-  voltageLDR_Entrada = voltageLDR_Ep4;
+  //brilhoLED = map(x_IN, x0, x1, y0, y1) 
+  brilhoLED = map(sensorValueLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, maxBrilhoEntradaFuncao, MIN_PERC_BRILHO);
+  brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);  */  
 
+  analogWrite(PIN_LED_EP4, brilhoLED);
+  delay(30);                // Esperar 30 ms para ser o efeito da alteração do brilho do LED [Milisegundos]
+  Serial.print("brilhoLED: ");      // debug
+  Serial.println(brilhoLED);
+  Serial.print(" ");
 
-  // Nota: em ambiente real, verificação poderia ser a cada 15 minutos
+  return sensorValueLDR;
 }

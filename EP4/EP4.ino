@@ -1,9 +1,9 @@
 /** 
  * @file EP4.ino
  * @brief EP4 – Iluminação noturna de presença
- * @date 07/01/2018
+ * @date 08/01/2018
  * @authors @authors Afonso Santos (nr. 2130653) & Natanael Godinho (nr. 2110634)
- * @state INC
+ * @state OK com map(). ver 2 detalhes
  */
 
 /** 
@@ -40,7 +40,7 @@ unsigned long instanteAtual_Ep4 = 0;
 boolean isMadrugada = false;           // Declara a variável com valor '0'          
 
 // Declaração de funções
-int funcao_Ep4(int maxBrilho);
+int funcaoEp4(int maxBrilho);
 
 void setup() {
   Serial.begin(9600);
@@ -62,19 +62,19 @@ void loop() {
     // Já passaram os 10 s desde o arranque do programa, significa que já é 'madrugada'
     isMadrugada = true;
     //Serial.println(isMadrugada);
-      //Serial.println("** passaram 10 s desde arranque. F-Madrugada!!");   // debug
-    sensorValueLDR_Ep4 = funcao_Ep4(MAX_BRILHO_MADRUGADA);
+    Serial.println(">>> Passaram 10 s desde arranque. Madrugada!! <<<");   // debug
+    sensorValueLDR_Ep4 = funcaoEp4(MAX_BRILHO_MADRUGADA);
   } else {
     isMadrugada = false;
     //Serial.println(isMadrugada);
-    sensorValueLDR_Ep4 = funcao_Ep4(MAX_PERC_BRILHO);
+    sensorValueLDR_Ep4 = funcaoEp4(MAX_PERC_BRILHO);
   }
 
-  if ((instanteAtual_Ep4 >= DELTA_T4) && isMadrugada == false) {
+  /*if ((instanteAtual_Ep4 >= DELTA_T4) && isMadrugada == false) {
     Serial.println(">>>>>>>>> HORA: 04:00h | É Madrugada! <<<<<<<<<");   // debug
     mensagemMadrugada = true;  
     // TODO: alterar qd tiver forma de sair da MADRUGADA
-  } 
+  } */
 
   delay(1000);
 }
@@ -84,7 +84,7 @@ void loop() {
  * @params Valor máximo do brilho, em função da hora
  * @return Valor da luminosidade
  */
-int funcao_Ep4(int maxBrilho) {
+int funcaoEp4(int maxBrilho) {
   int sensorValueLDR = 0;
   int declive = 0;
   int maxBrilhoEntradaFuncao = 0;
@@ -112,19 +112,19 @@ int funcao_Ep4(int maxBrilho) {
    * Declive: m = (y1 - y0) / (x1 - x0) 
    * Equação da reta: y = y0 + m(x - x0) 
    */ 
-
-  // 1ª forma
-  //declive = (maxBrilhoEntradaFuncao - MIN_PERC_BRILHO) / (VALOR_MIN_LUZ - VALOR_MAX_LUZ);
-       // maxBrilho é o valor máx. da luminosidade, em função da hora do dia
-  //brilhoLED = 0 + (declive * (sensorValueLDR - VALOR_MAX_LUZ)); 
-  // brilhoLED = (maxBrilhoEntradaFuncao / (VALOR_MIN_LUZ - VALOR_MAX_LUZ)) * (sensorValueLDR - VALOR_MAX_LUZ);
+  // 1ª forma       // TODO: test: evita valores negativos? 
+  declive = (MIN_PERC_BRILHO - maxBrilhoEntradaFuncao) / (VALOR_MAX_LUZ - VALOR_MIN_LUZ);
+  brilhoLED = MIN_PERC_BRILHO + (declive * (sensorValueLDR - VALOR_MIN_LUZ));     
   
+
+  //brilhoLED = (maxBrilhoEntradaFuncao / (VALOR_MIN_LUZ - VALOR_MAX_LUZ)) * (sensorValueLDR - VALOR_MAX_LUZ);
   //brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);
 
-  // 2ª forma: 
-  brilhoLED = map(sensorValueLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, maxBrilhoEntradaFuncao, MIN_PERC_BRILHO);
+  /* 2ª forma: OK
+  brilhoLED = map(x_IN, x0, x1, y0, y1) 
+  /*brilhoLED = map(sensorValueLDR, VALOR_MIN_LUZ, VALOR_MAX_LUZ, maxBrilhoEntradaFuncao, MIN_PERC_BRILHO);
       // brilhoLED = map(sensorValueLDR, 0, 1023, 255, 0);
-  brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);    // TODO: test: evita valores negativos? etc
+  brilhoLED = constrain(brilhoLED, MIN_PERC_BRILHO, maxBrilhoEntradaFuncao);  */  
 
   analogWrite(PIN_LED_EP4, brilhoLED);
   delay(30);       // Esperar 30 ms para ser o efeito da alteração do brilho do LED [Milisegundos]
